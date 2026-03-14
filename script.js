@@ -19,7 +19,7 @@ chat.scrollTop = chat.scrollHeight;
 
 window.onload = function(){
 
-addMessage("Hola 👋 Soy <b>JobBot</b>, tu agente inteligente de empleo.<br>¿Cómo te llamas?","bot");
+addMessage("👋 Hola, soy <b>JobBot</b>, tu asistente inteligente de empleo.<br>¿Cómo te llamas?","bot");
 
 }
 
@@ -39,7 +39,7 @@ if(step==0){
 
 userData.name = text;
 
-addMessage("Encantado <b>"+text+"</b> 😊<br>¿Qué carrera estudiaste?","bot");
+addMessage("Mucho gusto <b>"+text+"</b> 😊<br>¿Qué carrera estudiaste?","bot");
 
 step++;
 
@@ -59,11 +59,29 @@ else if(step==2){
 
 userData.exp = text;
 
-addMessage("Buscando vacantes reales para <b>"+userData.career+"</b>... 🔎","bot");
+addMessage("🔎 Buscando vacantes reales para <b>"+userData.career+"</b>...","bot");
 
 searchJobs(userData.career);
 
 step++;
+
+}
+
+else if(step==3){
+
+if(text.toLowerCase().includes("si")){
+
+addMessage("Perfecto 👍<br>Puedes subir tu CV abajo y te daré una evaluación como reclutador.","bot");
+
+}
+
+else{
+
+addMessage("Está bien. Si deseas buscar más vacantes escribe otra carrera.","bot");
+
+step=1;
+
+}
 
 }
 
@@ -75,20 +93,22 @@ let response = await fetch("https://remotive.com/api/remote-jobs?search="+career
 
 let data = await response.json();
 
-let jobs = data.jobs.slice(0,6);
+let jobs = data.jobs.slice(0,5);
 
 addMessage("<b>Encontré estas vacantes:</b>","bot");
 
 jobs.forEach(job => {
 
-addMessage(
-`<a href="${job.url}" target="_blank">
-🔗 ${job.title} - ${job.company_name}
-</a>`
-,"bot");
+addMessage(`
+<div class="job">
+<b>${job.title}</b><br>
+${job.company_name}<br>
+<a href="${job.url}" target="_blank">🔗 Ver oferta completa</a>
+</div>
+`,"bot");
 
 });
 
-addMessage("¿Quieres subir tu CV para analizarlo como reclutador? 📄","bot");
+addMessage("¿Quieres que analice tu perfil como reclutador profesional? (si / no)","bot");
 
 }
