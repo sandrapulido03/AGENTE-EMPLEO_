@@ -1,7 +1,7 @@
 let step = 0;
 let userData = {};
 
-function addMessage(text, type){
+function addMessage(text,type){
 
 let chat = document.getElementById("chat");
 
@@ -17,13 +17,19 @@ chat.scrollTop = chat.scrollHeight;
 
 }
 
-addMessage("Hola 👋 Soy JobBot. ¿Cómo te llamas?", "bot");
+window.onload = function(){
+
+addMessage("Hola 👋 Soy JobBot. ¿Cómo te llamas?","bot");
+
+}
 
 function sendMessage(){
 
 let input = document.getElementById("input");
 
 let text = input.value;
+
+if(text=="") return;
 
 addMessage(text,"user");
 
@@ -53,9 +59,9 @@ else if(step==2){
 
 userData.exp = text;
 
-addMessage("Perfecto. Estoy buscando trabajos para "+userData.career+"...","bot");
+addMessage("Buscando trabajos para "+userData.career+"...","bot");
 
-searchJobs(userData.career);
+searchJobs();
 
 step++;
 
@@ -63,7 +69,7 @@ step++;
 
 }
 
-async function searchJobs(career){
+async function searchJobs(){
 
 let response = await fetch("https://remotive.com/api/remote-jobs");
 
