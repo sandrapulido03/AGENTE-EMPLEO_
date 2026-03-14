@@ -19,7 +19,7 @@ chat.scrollTop = chat.scrollHeight;
 
 window.onload = function(){
 
-addMessage("👋 Hola, soy <b>JobBot</b>, tu asistente inteligente de empleo.<br>¿Cómo te llamas?","bot");
+addMessage("👋 Hola, soy <b>JobBot</b>, tu asistente de empleo.<br>¿Cómo te llamas?","bot");
 
 }
 
@@ -59,29 +59,11 @@ else if(step==2){
 
 userData.exp = text;
 
-addMessage("🔎 Buscando vacantes reales para <b>"+userData.career+"</b>...","bot");
+addMessage("🔎 Buscando vacantes para <b>"+userData.career+"</b>...","bot");
 
 searchJobs(userData.career);
 
 step++;
-
-}
-
-else if(step==3){
-
-if(text.toLowerCase().includes("si")){
-
-addMessage("Perfecto 👍<br>Puedes subir tu CV abajo y te daré una evaluación como reclutador.","bot");
-
-}
-
-else{
-
-addMessage("Está bien. Si deseas buscar más vacantes escribe otra carrera.","bot");
-
-step=1;
-
-}
 
 }
 
@@ -109,6 +91,102 @@ ${job.company_name}<br>
 
 });
 
-addMessage("¿Quieres que analice tu perfil como reclutador profesional? (si / no)","bot");
+addMessage("Ahora puedes subir tu CV para analizarlo.","bot");
+
+}
+
+document.getElementById("cv").addEventListener("change",function(event){
+
+let file = event.target.files[0];
+
+if(!file){
+
+return;
+
+}
+
+if(file.type !== "application/pdf"){
+
+addMessage("Por favor sube un archivo PDF.","bot");
+
+return;
+
+}
+
+let reader = new FileReader();
+
+reader.onload = function(){
+
+let typedarray = new Uint8Array(this.result);
+
+pdfjsLib.getDocument(typedarray).promise.then(function(pdf){
+
+let textContent = "";
+
+let totalPages = pdf.numPages;
+
+let countPromises = [];
+
+for(let i=1;i<=totalPages;i++){
+
+countPromises.push(
+
+pdf.getPage(i).then(function(page){
+
+return page.getTextContent().then(function(text){
+
+text.items.forEach(function(item){
+
+textContent += item.str + " ";
+
+});
+
+});
+
+})
+
+);
+
+}
+
+Promise.all(countPromises).then(function(){
+
+analyzeCV(textContent);
+
+});
+
+});
+
+};
+
+reader.readAsArrayBuffer(file);
+
+});
+
+function analyzeCV(text){
+
+addMessage("📄 Analizando tu CV como reclutador...","bot");
+
+let skills = [];
+
+if(text.toLowerCase().includes("excel")) skills.push("Excel");
+if(text.toLowerCase().includes("python")) skills.push("Python");
+if(text.toLowerCase().includes("data")) skills.push("Análisis de datos");
+if(text.toLowerCase().includes("logistica")) skills.push("Logística");
+if(text.toLowerCase().includes("project")) skills.push("Gestión de proyectos");
+
+if(skills.length==0){
+
+addMessage("No detecté habilidades claras en el CV.","bot");
+
+}
+
+else{
+
+addMessage("Detecté estas habilidades en tu CV: <b>"+skills.join(", ")+"</b>","bot");
+
+addMessage("💡 Consejo: fortalece herramientas analíticas y liderazgo para mejorar tu perfil profesional.","bot");
+
+}
 
 }
