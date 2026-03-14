@@ -1,6 +1,6 @@
 body{
 font-family:'Segoe UI',sans-serif;
-background:linear-gradient(135deg,#eef2ff,#dbeafe);
+background:linear-gradient(135deg,#e0e7ff,#dbeafe);
 display:flex;
 justify-content:center;
 align-items:center;
@@ -10,9 +10,9 @@ height:100vh;
 .container{
 background:white;
 padding:25px;
-width:420px;
+width:450px;
 border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,0.15);
+box-shadow:0 10px 30px rgba(0,0,0,0.15);
 }
 
 h1{
@@ -21,26 +21,29 @@ color:#2563eb;
 }
 
 #chat{
-height:320px;
+height:330px;
 overflow-y:auto;
 border:1px solid #eee;
 padding:10px;
 margin-bottom:10px;
-border-radius:8px;
+border-radius:10px;
 background:#fafafa;
 }
 
 .bot{
-color:#065f46;
-margin:6px;
+background:#ecfdf5;
+padding:8px;
+border-radius:6px;
+margin:5px;
 font-size:14px;
 }
 
 .user{
-color:#1d4ed8;
+background:#e0e7ff;
+padding:8px;
+border-radius:6px;
+margin:5px;
 text-align:right;
-margin:6px;
-font-size:14px;
 }
 
 input{
@@ -51,7 +54,7 @@ border:1px solid #ccc;
 }
 
 button{
-padding:10px 14px;
+padding:10px;
 border:none;
 background:#2563eb;
 color:white;
@@ -63,10 +66,17 @@ button:hover{
 background:#1d4ed8;
 }
 
+.job{
+border:1px solid #eee;
+padding:6px;
+margin:6px 0;
+border-radius:6px;
+}
+
 a{
 color:#2563eb;
-text-decoration:none;
 font-weight:bold;
+text-decoration:none;
 }
 
 a:hover{
