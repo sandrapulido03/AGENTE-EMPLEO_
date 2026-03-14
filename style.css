@@ -1,6 +1,6 @@
 body{
-font-family:Arial;
-background:#eef2ff;
+font-family:'Segoe UI',sans-serif;
+background:linear-gradient(135deg,#eef2ff,#dbeafe);
 display:flex;
 justify-content:center;
 align-items:center;
@@ -9,37 +9,66 @@ height:100vh;
 
 .container{
 background:white;
-padding:20px;
+padding:25px;
 width:420px;
-border-radius:10px;
-box-shadow:0 5px 20px rgba(0,0,0,0.1);
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+h1{
+text-align:center;
+color:#2563eb;
 }
 
 #chat{
-height:300px;
+height:320px;
 overflow-y:auto;
-margin-bottom:10px;
-border:1px solid #ddd;
+border:1px solid #eee;
 padding:10px;
+margin-bottom:10px;
+border-radius:8px;
+background:#fafafa;
 }
 
 .bot{
-color:green;
-margin:5px;
+color:#065f46;
+margin:6px;
+font-size:14px;
 }
 
 .user{
-color:blue;
+color:#1d4ed8;
 text-align:right;
-margin:5px;
+margin:6px;
+font-size:14px;
 }
 
 input{
 width:70%;
 padding:10px;
+border-radius:8px;
+border:1px solid #ccc;
 }
 
 button{
-padding:10px;
+padding:10px 14px;
+border:none;
+background:#2563eb;
+color:white;
+border-radius:8px;
 cursor:pointer;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+a{
+color:#2563eb;
+text-decoration:none;
+font-weight:bold;
+}
+
+a:hover{
+text-decoration:underline;
 }
