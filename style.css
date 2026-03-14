@@ -10,7 +10,7 @@ height:100vh;
 .container{
 background:white;
 padding:20px;
-width:400px;
+width:420px;
 border-radius:10px;
 box-shadow:0 5px 20px rgba(0,0,0,0.1);
 }
@@ -19,6 +19,8 @@ box-shadow:0 5px 20px rgba(0,0,0,0.1);
 height:300px;
 overflow-y:auto;
 margin-bottom:10px;
+border:1px solid #ddd;
+padding:10px;
 }
 
 .bot{
@@ -39,4 +41,5 @@ padding:10px;
 
 button{
 padding:10px;
+cursor:pointer;
 }
